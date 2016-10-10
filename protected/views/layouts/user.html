@@ -1,0 +1,52 @@
+{extends file="../layouts/admin.html"}
+{block name="box"}
+	<div class="row">
+        <div class="col-xs-2 sidebar">
+            <div class="panel-group" id="accordion">
+            	<div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><span class="glyphicon glyphicon-cog"></span> 订单管理</a>
+                        </h4>
+                    </div>
+                    <div id="collapse6" class="panel-collapse collapse in">
+                        <ul class="panel-body nav">
+                        	<li><a href="/manage">物流下单</a></li>
+                            <li><a href="/manage/orders">订单列表</a></li>
+                            <li><a href="/manage/account">用户列表</a></li>
+                            <li><a href="/manage/consigneeID">收件人信息列表</a></li>
+                            <li><a href="/manage/news">新闻管理</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-xs-10 col-xs-offset-2 main">
+        	<h4 class="page-header">{block name="title"}{$smarty.block.child}{/block}</h4>
+            {assign var="ok" value=Yii::app()->user->getFlash("success")}
+            {if $ok}
+            <div class="alert alert-success" role="alert">
+            	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>{$ok}
+            </div>
+            {/if}
+
+            {assign var="error" value=Yii::app()->user->getFlash("error")}
+            {if $error}
+            <div class="alert alert-danger" role="alert">
+            	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            	{if is_array($error)}
+            	{foreach $error as $ei}
+            	{foreach $ei as $e}
+            	<p>{$e}</p>
+            	{/foreach}
+            	{/foreach}
+            	{else}
+            	{$error}
+            	{/if}
+            </div>
+            {/if}
+            {block name="content"}{/block}
+        </div>
+	</div>
+{/block}

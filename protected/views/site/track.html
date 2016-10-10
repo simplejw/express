@@ -1,0 +1,30 @@
+{extends file="../layouts/site.html"}
+{block name="title"}订单查询{/block}
+{block name='css'}global,index{/block}
+{block name="content"}
+{print_r($result)}
+<div class="middle w clearfix">
+        <form action="/track" method="post">
+    	<input type="hidden" name="next" value="index"/>
+	        <div class="goods fl ">
+	            <div class="mt15 bigfs fs18 fw">货物追踪</div>
+	            <div class="mt10">
+	                <textarea name="date[track]">{$date.track}</textarea>
+	            </div>
+	            <div class="mt10">
+	                <div class="fl gc6">
+	                    <span>验证码：</span>
+	                    <input type="text" name="date[captcha]" class="yzm" />
+	                    <img src="/captcha"/>
+	                </div>
+	                <div class="fr">
+	                    <button style="submit" class="btn">查询<s></s></button>
+	                </div>
+	            </div>
+	        </div>
+       </form> 
+   	<div class="flow fr">
+        
+    </div>
+</div>
+{/block}

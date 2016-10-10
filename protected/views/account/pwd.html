@@ -1,0 +1,13 @@
+{extends file="../layouts/user.html"}
+{block name="title"}修改密码-我的账户{/block}
+{block name="swap"}
+{assign var="error" value=Yii::app()->user->getFlash("error")}
+{if $error}<p>{$error}</p>{/if}
+<form action="" method="post">
+<input type="hidden" name="next" value="{$next}">
+原密码：<input type="password" name="opassword"><br>
+新密码：<input type="password" name="password"><br>
+确认新密码：<input type="password" name="apassword"><br>
+<input type="submit" name="sub" value="修改密码">
+</form>
+{/block}

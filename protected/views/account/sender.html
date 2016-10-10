@@ -1,0 +1,40 @@
+{extends file="../layouts/user.html"}
+{block name="title"}寄件人-我的账户{/block}
+{block name="swap"}
+{assign var="error" value=Yii::app()->user->getFlash("error")}
+{if $error}<p>{$error}</p>{/if}
+
+{assign var="ok" value=Yii::app()->user->getFlash("ok")}
+{if $ok}<p>{$ok}</p>{/if}
+<div>
+	<form action="/account/sender/done?sender_id={$sender.sender_id}" method="post">
+    <input type="hidden" name="act" value="{if $sender}edit{else}add{/if}">
+    姓名：<input type="text" name="data[realname]" value="{$sender.realname}">
+    电话：<input type="text" name="data[mobile]" value="{$sender.mobile}">
+    邮编：<input type="text" name="data[postcode]" value="{$sender.postcode}">
+    地址：<input type="text" name="data[address]" value="{$sender.address}">
+    <input type="submit" name="sub" value="提交">
+    </form>
+</div>
+<hr>
+<table cellpadding="0" cellspacing="0" width="100%">
+	<thead>
+    	<th>编号</th>
+        <th>姓名</th>
+        <th>电话</th>
+        <th>地址</th>
+        <th>#</th>
+    </thead>
+    <tbody>
+    	{foreach $senders as $sender}
+    	<tr>
+        	<td>{$sender.sender_id}</td>
+            <td>{$sender.realname}</td>
+            <td>{$sender.mobile}</td>
+            <td>{$sender.address} {$sender.postcode}</td>
+            <td><a href="/account/sender?sender_id={$sender.sender_id}">修改</a> <a href="/account/sender/del?sender_id={$sender.sender_id}">删除</a> {if $sender.is_default == 0}<a href="/account/sender/done?sender_id={$sender.sender_id}">设为默认值</a>{/if}</td>
+        </tr>
+        {/foreach}
+    </tbody>
+</table>
+{/block}

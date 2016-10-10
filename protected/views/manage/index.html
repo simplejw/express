@@ -1,0 +1,101 @@
+{extends file="layouts/user.html"}
+{block name="content"}
+<h4 class="page-header">首页</h4>
+                 
+
+<form method ='post' class='form-horizontal' id="form">
+
+	<div class='form-group'>
+		<label for="order_sn"  class='col-md-2 control-label'>订单编码：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'order_sn' class="form-control" value="">
+		</div>
+	</div>
+	<hr>
+	<div class='form-group'>
+		<label for="sender_realname"  class='col-md-2 control-label'>寄件人：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'sender_realname' class="form-control" value="">
+		</div>
+	</div>
+	<div class='form-group'>
+		<label for="sender_mobile"  class='col-md-2 control-label'>寄件人电话：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'sender_mobile' class="form-control" value="">
+		</div>
+	</div>
+	<div class='form-group'>
+		<label for="sender_postcode"  class='col-md-2 control-label'>寄件人邮编：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'sender_postcode' class="form-control" value="">
+		</div>
+	</div>
+	<div class='form-group'>
+		<label for="sender_address"  class='col-md-2 control-label'>寄件人地址：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'sender_address' class="form-control" value="">
+		</div>
+	</div>
+	<hr>
+	<div class='form-group'>
+		<label for="consignee_realname"  class='col-md-2 control-label'>收件人姓名：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'consignee_realname' class="form-control" value="">
+		</div>
+	</div>
+	<div class='form-group'>
+		<label for="consignee_mobile"  class='col-md-2 control-label'>收件人电话：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'consignee_mobile' class="form-control" value="">
+		</div>
+	</div>
+	<div class='form-group'>
+		<label for="consignee_postcode"  class='col-md-2 control-label'>收件人邮编：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'consignee_postcode' class="form-control" value="">
+		</div>
+	</div>
+	<div class='form-group'>
+		<label for="consignee_address"  class='col-md-2 control-label'>收件人地址：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'consignee_address' class="form-control" value="">
+		</div>
+	</div>
+	<hr>
+	<div class='form-group'>
+		<label for="user_weight"  class='col-md-2 control-label'>用户-包裹重量：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'user_weight' class="form-control" value="">
+		</div>
+	</div>
+	
+	<div class='form-group'>
+		<label for="shipping_weight"  class='col-md-2 control-label'>运输实际重量：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'shipping_weight' class="form-control" value="">
+		</div>
+	</div>
+	
+	<div class='form-group'>
+		<label for="amount"  class='col-md-2 control-label'>订单价格：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'amount' class="form-control" value="">
+		</div>
+	</div>
+	
+	<div class='form-group'>
+		<label for="note"  class='col-md-2 control-label'>备注：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'note' class="form-control" value="">
+		</div>
+	</div>
+	
+
+	<div class='form-group'>
+		<div class='col-md-2 col-md-offset-2'>
+			<button type="submit" class="btn btn-danger submit">提交</button>
+		</div>
+	</div>
+</form>
+
+{/block}

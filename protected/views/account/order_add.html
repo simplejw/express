@@ -1,0 +1,67 @@
+{extends file="../layouts/user.html"}
+{block name="title"}在线下单-我的账户{/block}
+{block name="swap"}
+{assign var="error" value=Yii::app()->user->getFlash("error")}
+{if $error}<p>{$error}</p>{/if}
+
+{assign var="ok" value=Yii::app()->user->getFlash("ok")}
+{if $ok}<p>{$ok}</p>{/if}
+<hr>
+<form action="" method="post">
+寄件人：<select name="data[sender_id]">
+	<option value="0">选择</option>
+    {foreach $senders as $sender}
+    <option value="{$sender.sender_id}" {if $sender.is_default}selected{/if}>{$sender.realname},{$sender.mobile},{$sender.address},{$sender.postcode}</option>
+    {/foreach}
+</select> <a href="/account/sender">添加寄件人</a><br>
+收件人：<select name="data[consignee_id]">
+	<option value="0">选择</option>
+    {foreach $consignees as $consignee}
+    <option value="{$consignee.consignee_id}" {if $consignee.is_default}selected{/if}>{$consignee.realname},{$consignee.mobile},{$consignee.address},{$consignee.postcode},身份证：{$consignee.idcard}</option>
+    {/foreach}
+</select> <a href="/account/consignee">添加收件人</a><br>
+重量：<input type="text" name="data[user_weight]" value="0.0">kg(不能超过40KG)<br>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="0" id="goods_list">
+	<thead>
+    	<th>商品名称</th>
+        <th>商品单价</th>
+        <th>商品数量</th>
+        <th>#</th>
+    </thead>
+    <tbody>
+    	<tr>
+        	<td><input type="text" name="goods_name[]"></td>
+            <td><input type="text" name="amount[]" value="0.0"></td>
+            <td><input type="text" name="goods_number[]" value="0"></td>
+            <td>
+            	<a href="" class="add">添加</a>
+                <a href="" class="del">删除</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<input type="submit" name="sub" value="下单">
+</form>
+{/block}
+{block name="js"}
+<script>
+var el = $('#goods_list').find('tbody tr').eq(0).clone();
+
+$('.add').live('click',function(){
+	$('#goods_list tbody').append(el.clone());
+	return false;
+});
+
+$('.del').live('click',function(){
+	
+	if ($('#goods_list').find('tbody tr').size() > 1)
+	{
+		$(this).parent().parent().remove();
+	}
+	
+	return false;
+});
+</script>
+{/block}

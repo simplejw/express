@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{block name="title"}{/block} - 快递</title>
+
+{block name='css'}
+    {capture "cssfile"}
+    {$smarty.block.child}
+    {/capture}
+    {if $smarty.capture.cssfile|trim ne ""}
+    {foreach explode(',',$smarty.capture.cssfile|trim) as $key => $val}
+    <link type="text/css" rel="stylesheet" href="/style/{$val}.css"/>
+    {/foreach}
+    {/if}
+{/block}
+</head>
+<body>
+<div class="head w clearfix">
+	<a href="/" class="logo fl mb10" tittle="快递">
+	    <img src="style/logo.jpg">
+	</a>
+	<div class="fr fs16 bigfs mt50">
+	{if Yii::app()->session['uid']}{Yii::app()->session['name']}, <a href="/logout">退出登录</a>{else}<a href="/register">会员注册</a> / <a href="/login">会员登录</a>{/if}
+	</div>
+</div>
+<div class="nav wout main_nav over_visi">
+    <div class="w pr">
+        <ul class="main_nav_a">
+            <li>
+                <a href="/" class="on index">首页</a>
+            </li>
+            <li>
+                <a href="/uploadid" title="上传证件">上传证件</a>
+            </li>
+            <li>
+                <a href="/guide" title="上传证件">邮寄指南</a>
+            </li>
+            <li>
+                <a href="/" title="会员中心">会员中心</a>
+            </li>
+            <li>
+                <a href="/" title="在线下单">在线下单</a>
+            </li>
+            <li class="m0">
+                <a href="/" title="联系我们">联系我们</a>
+            </li>
+        </ul>
+	</div>
+</div>
+{block name="content"}
+{/block}
+<div class="tac mt100 mb20 gc9 wout">
+        <p><a target="_blank" rel="nofollow" href="/">关于澳洲 </a>|
+        <a target="_blank" rel="nofollow" href="/">联系我们 </a>|
+        <a target="_blank" rel="nofollow" href="/">网站地图 </a>|
+        <a target="_blank" rel="nofollow" href="/">服务条款 </a>|
+	<a href="http://m.kuaidi100.com" target="_blank">快递查询</a>
+        版权所有 Copyright
+        <font clsaa="numfs">©</font>
+        2015 AuFirstExpress 快递 All Right Reserved</p>
+    </div>
+</div>
+</body>
+<script src="http://static.xxx.com.au/js/lib/do.js"></script>
+
+{block name="js"}
+<script>
+
+</script>
+{/block}
+</html>

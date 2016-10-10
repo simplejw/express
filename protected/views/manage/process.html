@@ -1,0 +1,69 @@
+{extends file="layouts/user.html"}
+{block name="title"}物流信息{/block}
+{block name="content"}
+
+<div class="panel-body form-inline">
+收货人姓名：{$Orders.consignee_realname} 收货人联系电话：{$Orders.consignee_mobile} 收货人邮编：{$Orders.consignee_postcode} 收货人地址：{$Orders.consignee_address} <br>
+用户-包裹重量：{$Orders.user_weight}  运输实际重量：{$Orders.shipping_weight} 订单价格：{$Orders.amount} 备注： {$Orders.note}  
+</div>
+
+<form method ='post' class='form-horizontal' id="form">
+{if $Orders.shipping_status == 0}
+	<a href="/manage/orders">返回订单列表</a>
+	<hr>
+    <div class="">
+    <button type="submit" class="btn btn-success pull-left">确认收件</button>
+    </div>
+{elseif $Orders.shipping_status == 1}
+<a href="/manage/orders">返回订单列表</a>
+	<hr>
+    <div class="">
+    <button type="submit" class="btn btn-success pull-left">完成打包</button>
+    </div>
+{elseif $Orders.shipping_status == 2}
+<a href="/manage/orders">返回订单列表</a>
+    <hr>
+    <div class="">
+    <button type="submit" class="btn btn-success pull-left">确认进入空运</button>
+    </div>
+{elseif $Orders.shipping_status == 3}
+<a href="/manage/orders">返回订单列表</a>
+    <hr>
+    <div class="">
+    <button type="submit" class="btn btn-success pull-left">确认到海关</button>
+    </div>
+{elseif $Orders.shipping_status == 4 || $Orders.shipping_status == 5}
+<a href="/manage/orders">返回订单列表</a>
+
+	<div class='form-group'>
+		<label for="ems_sn"  class='col-md-2 control-label'>EMS单号：</label>
+		<div class='col-md-4'>
+			<input type="text" name = 'ems_sn' class="form-control" value="" placeholder="请输入快递单号。"
+			data-bv-notempty="true"
+            data-bv-notempty-message="名称必填"
+            data-bv-stringlength="true"
+            data-bv-stringlength-max="100"
+            data-bv-stringlength-message="字符长度不能超过100位">
+		</div>
+	</div>
+	<div class='form-group'>
+		<div class='col-md-2 col-md-offset-2'>
+			<button type="submit" class="btn btn-danger submit">已转EMS</button>
+		</div>
+	</div>
+
+
+{elseif $Orders.shipping_status == 6 || $Orders.shipping_status == 7}
+<a href="/manage/orders">返回订单列表</a>
+    <hr>
+    <div class="">
+    <button type="submit" class="btn btn-success pull-left">确认收件</button>
+    </div>
+{elseif $Orders.shipping_status == 8}
+<a href="/manage/orders">返回订单列表</a>
+<hr>
+</form>
+{/if}
+
+
+{/block}

@@ -1,0 +1,27 @@
+{extends file="../layouts/site.html"}
+{block name="title"}登录{/block}
+{block name='css'}global,index{/block}
+{block name="content"}
+{assign var="error" value=Yii::app()->user->getFlash("error")}
+{if $error}<p>{$error}</p>{/if}
+<form action="" method="post">
+	<input type="hidden" name="next" value="{$next}">
+	<div class="regist_box w">
+	 <div class="regist_tit">会员登陆</div>
+	 	<div class="regist_form">
+	     <div class="regist_item">
+	         <span>邮箱: </span>
+	         <input class="form_txt" type="email" name="data[email]">
+	     </div>
+	    <div class="regist_item">
+	         <span>密码: </span>
+	         <input class="form_txt" type="password" name="data[password]">
+	    </div>
+	    <div class="regist_item mt30">
+	         <button class="regist_btn">登陆<s></s></button>
+	         <a class="color_b ml20" href="#">已注册？</a>
+	    </div>
+	 </div>
+	</div>
+</form>
+{/block}

@@ -1,0 +1,79 @@
+{extends file="layouts/user.html"}
+{block name="title"}编辑 会员信息{/block}
+{block name="css"}datetimepicker.min{/block}
+{block name="content"}
+	<div class="row">
+		{if Yii::app()->user->hasFlash('error')}
+			<div class="alert alert-danger alert-dismissible fade in text-center" role="alert">
+		      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+		     {Yii::app()->user->getFlash('error')}
+		    </div>
+		{/if}
+	</div>
+	<form method ='post' class='form-horizontal' id="form">
+		
+		<div class='form-group'>
+			<label for="email"  class='col-md-2 control-label'>Email：</label>
+			<div class='col-md-4'>
+				<input type="text" name = 'email' class="form-control" value="{$Account.email}"
+				data-bv-notempty="true"
+                data-bv-notempty-message="名称必填"
+                data-bv-stringlength="true"
+                data-bv-stringlength-max="100"
+                data-bv-stringlength-message="字符长度不能超过100位">
+			</div>
+		</div>
+
+		
+		<div class='form-group'>
+			<label for="mobile"  class='col-md-2 control-label'>手机：</label>
+			<div class='col-md-4'>
+				<input type="text" name = 'mobile' class="form-control" value="{$Account.mobile}"
+				data-bv-notempty="true"
+                data-bv-notempty-message="名称必填"
+                data-bv-stringlength="true"
+                data-bv-stringlength-max="20"
+                data-bv-stringlength-message="字符长度不能超过20位">
+			</div>
+		</div>
+		
+		<div class='form-group'>
+			<label for="status"  class='col-md-2 control-label'>会员状态(0不可用1可用)：</label>
+			<div class='col-md-4'>
+				<input type="number" name = 'status' class="form-control" value="{$Account.status}"
+				data-bv-notempty="true"
+                data-bv-notempty-message="名称必填"
+                data-bv-stringlength="true"
+                data-bv-stringlength-max="1"
+                data-bv-stringlength-message="字符长度不能超过1位">
+			</div>
+		</div>
+
+		
+
+		<div class='form-group'>
+			<div class='col-md-2 col-md-offset-2'>
+				<button type="submit" class="btn btn-danger submit">提交</button>
+			</div>
+		</div>
+	</form>
+{/block}
+
+{block name="js"}
+	<script type="text/javascript" src="/js/datetimepicker.js"></script>
+	<script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
+	<script type="text/javascript">
+		$('#registered').datetimepicker({
+		    format: 'yyyy-mm-dd hh:ii'
+		});
+
+		$('#form').bootstrapValidator({
+			submitButtons: 'button[type=submit]',
+	        feedbackIcons: {
+	            valid: 'glyphicon glyphicon-ok',
+	            invalid: 'glyphicon glyphicon-remove',
+	            validating: 'glyphicon glyphicon-refresh'
+	        }
+		});
+	</script>
+{/block}

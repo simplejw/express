@@ -1,0 +1,45 @@
+{extends file="layouts/user.html"}
+{block name="content"}
+<h4 class="page-header">用户列表</h4>
+
+
+			<table class="table table-hover table-striped">
+			    <thead>
+			        <tr>
+			            <th>注册邮箱</th>
+			            <th>手机</th>
+			            <th>会员状态(0不可用1可用)</th>
+			            <th>注册时间</th>
+			            <th>#</th>        
+			        </tr>
+			    </thead>
+			    <tbody>
+			        {foreach $account as $acc}
+			        <tr>
+			            <td>{$acc.email}</td>
+			            <td>{$acc.mobile}</td>
+			            <td>{if $acc.status eq 1}可用{else}不可用{/if}</td>
+			            <td>{$acc.add_time|date_format:"%Y/%m/%d %H:%I:%S"}</td>
+			            <td>
+							<a href="/manage/edit/{$acc.account_id}"><span class="glyphicon glyphicon-pencil"></span></a>
+
+						</td>
+			        </tr>
+			        {/foreach}
+			    </tbody>
+			</table>
+			
+{assign var="page" value=$this->widget('application.widgets.WebPager',['pages'=>$pages])}
+
+    <div class="modal fade showorder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog modal-lg">
+		        <div class="modal-content">
+		
+		        </div>
+	    </div>
+	</div>
+
+
+</div>
+</body>
+{/block}

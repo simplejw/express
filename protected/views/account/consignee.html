@@ -1,0 +1,43 @@
+{extends file="../layouts/user.html"}
+{block name="title"}收件人-我的账户{/block}
+{block name="swap"}
+{assign var="error" value=Yii::app()->user->getFlash("error")}
+{if $error}<p>{$error}</p>{/if}
+
+{assign var="ok" value=Yii::app()->user->getFlash("ok")}
+{if $ok}<p>{$ok}</p>{/if}
+<div>
+	<form action="/account/consignee/done?consignee_id={$consignee.consignee_id}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="act" value="{if $consignee}edit{else}add{/if}">
+    姓名：<input type="text" name="data[realname]" value="{$consignee.realname}">
+    电话：<input type="text" name="data[mobile]" value="{$consignee.mobile}">
+    邮编：<input type="text" name="data[postcode]" value="{$consignee.postcode}">
+    地址：<input type="text" name="data[address]" value="{$consignee.address}"><br>
+    身份证号：<input type="text" name="data[idcard]" value="{$consignee.idcard}">
+    身份证正面：<input type="file" name="id_fg">
+    身份整背面：<input type="file" name="id_bg">
+    <input type="submit" name="sub" value="提交">
+    </form>
+</div>
+<hr>
+<table cellpadding="0" cellspacing="0" width="100%">
+	<thead>
+    	<th>编号</th>
+        <th>姓名</th>
+        <th>电话</th>
+        <th>地址</th>
+        <th>#</th>
+    </thead>
+    <tbody>
+    	{foreach $consignees as $consignee}
+    	<tr>
+        	<td>{$consignee.consignee_id}</td>
+            <td>{$consignee.realname}</td>
+            <td>{$consignee.mobile}</td>
+            <td>{$consignee.address} {$consignee.postcode}</td>
+            <td><a href="/account/consignee?consignee_id={$consignee.consignee_id}">修改</a> <a href="/account/consignee/del?consignee_id={$consignee.consignee_id}">删除</a> {if $consignee.is_default == 0}<a href="/account/consignee/done?consignee_id={$consignee.consignee_id}">设为默认值</a>{/if}</td>
+        </tr>
+        {/foreach}
+    </tbody>
+</table>
+{/block}

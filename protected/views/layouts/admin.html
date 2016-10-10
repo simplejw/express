@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<title>{block name="title"}{/block} - 商城管理中心</title>
+<link rel="stylesheet" href="/style/bootstrap.min.css">
+<link rel="stylesheet" href="/style/bootstrap.editable.css">
+<link rel="stylesheet" href="/style/common.css">
+
+<!--[if lt IE 9]>
+<script src="/js/html5shiv.min.js"></script>
+<script src="/js/respond.min.js"></script>
+<![endif]-->
+
+{block name='css'}
+    {capture "cssfile"}
+    {$smarty.block.child}
+    {/capture}
+    {if $smarty.capture.cssfile|trim ne ""}
+    {foreach explode(',',$smarty.capture.cssfile|trim) as $key => $val}
+    <link type="text/css" rel="stylesheet" href="/style/{$val}.css"/>
+    {/foreach}
+    {/if}
+{/block}
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="row head">
+            <div class="col-xs-2 logo"></div>
+            <div class="col-xs-6"></div>
+            {if Yii::app()->session['id']}<div class="col-xs-2"><a href="/manage/index">管理首页</a> 当前:{Yii::app()->session['name']}</div>
+            <div class="col-xs-2"><a href="/manage/pwd">修改密码</a> <a href="/logout">退出</a></div>{/if}
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+{block name="box"}
+{/block}
+</div>
+</body>
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.editable.min.js"></script>
+{block name="js"}{/block}
+</html>

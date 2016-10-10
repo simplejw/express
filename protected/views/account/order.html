@@ -1,0 +1,31 @@
+{extends file="../layouts/user.html"}
+{block name="title"}我的包裹-我的账户{/block}
+{block name="swap"}
+{assign var="error" value=Yii::app()->user->getFlash("error")}
+{if $error}<p>{$error}</p>{/if}
+
+{assign var="ok" value=Yii::app()->user->getFlash("ok")}
+{if $ok}<p>{$ok}</p>{/if}
+
+<table cellpadding="0" cellspacing="0" width="100%">
+	<thead>
+    	<th>编号</th>
+        <th>包裹号</th>
+        <th>寄件人</th>
+        <th>收件人</th>
+        <th>#</th>
+    </thead>
+    <tbody>
+    	{foreach $orders as $order}
+    	<tr>
+        	<td>{$order.order_id}</td>
+            <td>{$consignee.realname}</td>
+            <td>{$consignee.mobile}</td>
+            <td>{$consignee.address} {$consignee.postcode}</td>
+            <td><a href="/account/consignee?consignee_id={$consignee.consignee_id}">查看</a></td>
+        </tr>
+        {/foreach}
+    </tbody>
+</table>
+
+{/block}

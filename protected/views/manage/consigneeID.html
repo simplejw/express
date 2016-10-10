@@ -1,0 +1,66 @@
+{extends file="layouts/user.html"}
+{block name="title"}收件人信息列表{/block}
+{block name="css"}datetimepicker.min{/block}
+{block name="content"}
+<div class="navbar navbar-default navbar-static">
+
+    <form class="navbar-form row" role="search" method="get">
+    
+        <input type="text" name="realname" class="form-control" placeholder="请输入真实姓名" value="{$realname}" >
+    	<input type="text" name="mobile" class="form-control" placeholder="请输入手机号码" value="{$mobile}">
+        <input type="text" name="idcard" class="form-control" placeholder="请输入身份证号码" value="{if $idcard}{$idcard}{/if}">
+        
+        <button type="submit" class="btn btn-default">查找</button>
+        
+    </form>
+</div>
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>收件人ID</th>
+            <th>导出正面</th>
+            <th>导出反面</th>
+            <th>真实姓名</th>
+            <th>手机号码</th>
+            <th>身份证号码</th>
+            <th>注册时间</th>
+            <th>合并导出身份证</th>
+            <th>#</th>
+        </tr>
+    </thead>
+    <tbody>
+    	{foreach $Consignee as $Con}
+        <tr>
+         <td>{$Con.consignee_id}</td>
+         <td><a href="{Yii::app()->params['confirm']}{$Con.id_fg}" target="_blank">
+         <img src="{Yii::app()->params['confirm']}{$Con.id_fg}" alt="" width="50px" height='50px' class="confirm" data-toggle="popover">
+         	 </a></td>
+         <td><a href="{Yii::app()->params['confirm']}{$Con.id_bg}" target="_blank">
+         <img src="{Yii::app()->params['confirm']}{$Con.id_bg}" alt="" width="50px" height='50px' class="confirm" data-toggle="popover">
+         	 </a></td>
+         <td>{$Con.realname}</td>
+         <td>{$Con.mobile}</td>
+         <td>{$Con.idcard}</td>
+         <td>{$Con.add_time|date_format:"%Y/%m/%d %H:%I:%S"}</td>
+         <td><a href="/manage/mergerImg/{$Con.consignee_id}" class="btn btn-default import" data-id="{$Con.consignee_id}">导出身份证</a></td>
+         <td><a href="/manage/delinfo/{$Con.consignee_id}">删除</a></td>
+        </tr>
+        {/foreach}
+    </tbody>
+</table>
+
+
+
+{assign var="page" value=$this->widget('application.widgets.WebPager',['pages'=>$pages])}
+<div class="modal fade showorder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name='js'}
+
+{/block}

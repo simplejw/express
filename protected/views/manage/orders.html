@@ -1,0 +1,64 @@
+{extends file="layouts/user.html"}
+{block name="content"}
+<h4 class="page-header">订单管理</h4>
+
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>订单编码</th>
+            <th>EMS编号</th>
+            <th>寄件人</th>
+            <th>寄件人电话</th>
+            <th>寄件人邮编</th>
+            <th>寄件人地址</th>
+            <th>收件人姓名</th>
+            <th>收件人电话</th>
+            <th>收件人邮编</th>
+            <th>收件人地址</th>
+            <th>用户-包裹重量</th>
+            <th>运输实际重量</th>
+            <th>订单价格</th>
+            <th>订单状态</th>
+            <th>配送状态</th>
+            <th>备注</th>
+            <th>下单时间</th>
+            <th>#</th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach $orders as $order}
+        <tr>
+            <td><!--<a href="/manage/orderGoods/{$order.order_sn}"></a>-->{$order.order_sn}</td>
+            <td>{$order.ems_sn}</td>
+            <td><!--<a href="/manage/sender/{$order.sender_id}"></a>-->{$order.sender_realname}</td>
+            <td>{$order.sender_mobile}</td>
+            <td>{$order.sender_postcode}</td>
+            <td>{$order.sender_address}</td>
+            <td><!--<a href="/manage/consignee/{$order.consignee_id}"></a>-->{$order.consignee_realname}</td>
+            <td>{$order.consignee_mobile}</td>
+            <td>{$order.consignee_postcode}</td>
+            <td>{$order.consignee_address}</td>
+            <td>{$order.user_weight} kg</td>
+            <td>{$order.shipping_weight} kg</td>
+            <td>￥{$order.amount}</td>
+            <td>{Yii::app()->params['order_status'][$order.order_status]}</td>
+            <td>{Yii::app()->params['shipping_status'][$order.shipping_status]}</td>
+            <td>{$order.note}</td>
+            <td>{$order.add_time|date_format:"%Y/%m/%d %H:%I:%S"}</td>
+            <td><a href="/manage/process/{$order.order_id}">{Yii::app()->params['order_do'][$order.shipping_status]}</a></td>
+        </tr>
+        {/foreach}
+    </tbody>
+
+</table>
+{assign var="page" value=$this->widget('application.widgets.WebPager',['pages'=>$pages])}
+
+<div class="modal fade showorder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+{/block}

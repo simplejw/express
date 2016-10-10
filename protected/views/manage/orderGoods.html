@@ -1,0 +1,42 @@
+{extends file="layouts/user.html"}
+{block name="content"}
+<h4 class="page-header">订单物品信息</h4>                                
+
+					<table class="table table-hover table-striped">
+					    <thead>
+					        <tr>
+					            <th>订单编号</th>
+					            <th>物品名称</th>
+					            <th>短名称</th>
+					            <th>物品条码</th>
+					            <th>商品价格</th>
+					            <th>商品数量</th>
+					            <th>操作日志</th>
+					        </tr>
+					    </thead>
+					    <tbody>
+					        {foreach $ordergoods as $con}
+					        <tr>
+					            <td>{$con.order_sn}</td>
+					            <td>{$con.name}</td>
+					            <td>{$con.short_name}</td>
+					            <td>{$con.barcode}</td>
+					            <td>￥{$con.amount}</td>
+					            <td>{$con.goods_number}</td>
+					            <td><a href="/manage/orderLog/{$con.order_id}">查看</a></td>
+					        </tr>
+					        {/foreach}
+					    </tbody>
+					
+					</table>
+		<div class="modal fade showorder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog modal-lg">
+		        <div class="modal-content">
+		
+		        </div>
+		    </div>
+		</div>
+
+</div>
+</body>
+{/block}
