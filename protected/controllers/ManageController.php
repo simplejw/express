@@ -208,9 +208,9 @@ class ManageController extends Controller
 		{
 			Yii::app()->end();
 		}
-    	//print_r($Account);exit;
-    	if(Yii::app()->request->getIsPostRequest())
-    	{
+    	    //print_r($Account);exit;
+    	    if(Yii::app()->request->getIsPostRequest())
+    	    {
     		$data = array(
 				'email' => trim(Yii::app()->request->getPost('email', '')),
 				'mobile' => trim(Yii::app()->request->getPost('mobile', '')),
@@ -234,9 +234,9 @@ class ManageController extends Controller
 			Yii::app()->user->setFlash($status, $msg);
 			$this->redirect($toWhere, true);
 			
-    	}
+    	    }
     	
-    	$this->render('edit', array(
+    	    $this->render('edit', array(
 			'Account' => $Account,
 		));
 	}
@@ -253,19 +253,19 @@ class ManageController extends Controller
 		$condition = 'username=:username';
  		$params = array(':username'=>trim(Yii::app()->session['name']));
 			
-    	$Admin = Admin::model()->find(array(
-		'condition' => $condition, 
-		'params' => $params,
+    	        $Admin = Admin::model()->find(array(
+			'condition' => $condition, 
+			'params' => $params,
 		));
 	    	
-	    if(empty($Admin))
+	        if(empty($Admin))
 		{
 			Yii::app()->end();
 		}
 	    	
-    	if(Yii::app()->request->getIsPostRequest())
-    	{
-    		$data = array(
+    	        if(Yii::app()->request->getIsPostRequest())
+    	        {
+    		        $data = array(
 				'username' => trim(Yii::app()->request->getPost('username', '')),
 				'oldpassword' => trim(Yii::app()->request->getPost('oldpassword', '')),
 				'password' => md5(trim(Yii::app()->request->getPost('password', ''))),
@@ -296,9 +296,9 @@ class ManageController extends Controller
 			Yii::app()->user->setFlash($status, $msg);
 			$this->redirect($toWhere, true);
 			
-    	}
+    	        }
     	
-    	$this->render('pwd', array(
+    	        $this->render('pwd', array(
 			'Admin' => $Admin,
 		));
 	}
@@ -314,7 +314,7 @@ class ManageController extends Controller
   		$realname = trim(Yii::app()->request->getQuery('realname', ''));
 		$mobile = trim(Yii::app()->request->getQuery('mobile', ''));
 		$idcard = trim(Yii::app()->request->getQuery('idcard', ''));
-	    //print_r($idcard);exit;  		
+	        //print_r($idcard);exit;  		
 		if (!empty($realname))
 		{
 			$criteria->addSearchCondition('realname', $realname);
@@ -551,171 +551,171 @@ class ManageController extends Controller
 		$this->redirect('/manage/news', true);
 	}
 	      
-	      /*
-	       * 导出证件正面
-	       */
-	       /*public function actionDownload($consignee_id)
+      /*
+       * 导出证件正面
+       */
+       /*public function actionDownload($consignee_id)
+		{	
+			$Consignee = Consignee::model()->findByPk($consignee_id);
+			$file = $Consignee['id_fg'];
+			$new_name = $Consignee['realname'];
+			if (!empty($file))
 			{	
-				$Consignee = Consignee::model()->findByPk($consignee_id);
-				$file = $Consignee['id_fg'];
-				$new_name = $Consignee['realname'];
-				if (!empty($file))
-				{	
-					$file_url = Yii::getPathOfAlias('webroot.upload') . DIRECTORY_SEPARATOR . $file;
-					$fileinfo = pathinfo($file_url);
-					$file_name=basename($file_url);
-				    $file_type=explode('.',$file_url);
-				    $file_type=$file_type[count($file_type)-1];
-				    $file_name = $new_name.'-1.'.$file_type;
-				    //print_r($file_name);exit;
-				    $file_type=fopen($file_url,'r'); //打开文件
-				    //输入文件标签
-				    header("Content-type: application/octet-stream");
-				    header("Accept-Ranges: bytes");
-				    header("Accept-Length: ".filesize($file_url));
-				    header("Content-Disposition: attachment; filename=".$file_name);
-				    //输出文件内容
-				    echo fread($file_type,filesize($file_url));
-				    fclose($file_type);
-				}
-			}*/
+				$file_url = Yii::getPathOfAlias('webroot.upload') . DIRECTORY_SEPARATOR . $file;
+				$fileinfo = pathinfo($file_url);
+				$file_name=basename($file_url);
+			    $file_type=explode('.',$file_url);
+			    $file_type=$file_type[count($file_type)-1];
+			    $file_name = $new_name.'-1.'.$file_type;
+			    //print_r($file_name);exit;
+			    $file_type=fopen($file_url,'r'); //打开文件
+			    //输入文件标签
+			    header("Content-type: application/octet-stream");
+			    header("Accept-Ranges: bytes");
+			    header("Accept-Length: ".filesize($file_url));
+			    header("Content-Disposition: attachment; filename=".$file_name);
+			    //输出文件内容
+			    echo fread($file_type,filesize($file_url));
+			    fclose($file_type);
+			}
+		}*/
 			
 			
-			/*
-			 * 导出证件反面
-			 */
-			/*public function actionDownloadBG($consignee_id)
-			{	
-				$Consignee = Consignee::model()->findByPk($consignee_id);
-				$file = $Consignee['id_bg'];
-				$new_name = $Consignee['realname'];
-				if (!empty($file))
-				{	
-					$file_url = Yii::getPathOfAlias('webroot.upload') . DIRECTORY_SEPARATOR . $file;
-					$fileinfo = pathinfo($file_url);
-					$file_name=basename($file_url);
-				    $file_type=explode('.',$file_url);
-				    $file_type=$file_type[count($file_type)-1];
-				    $file_name = $new_name.'-2.'.$file_type;
-				    //print_r($file_name);exit;
-				    $file_type=fopen($file_url,'r'); //打开文件
-				    //输入文件标签
-				    header("Content-type: application/octet-stream");
-				    header("Accept-Ranges: bytes");
-				    header("Accept-Length: ".filesize($file_url));
-				    header("Content-Disposition: attachment; filename=".$file_name);
-				    //输出文件内容
-				    echo fread($file_type,filesize($file_url));
-				    fclose($file_type);
-				}
-			}*/
-			
-			/*
-			 * 合并图片并下载
-			 */
-			 public function actionMergerImg($consignee_id)
-			 {	
-			 	$Consignee = Consignee::model()->findByPk($consignee_id);
-			 	$allowtype = array('jpg', 'jpeg', 'png', 'gif');
-			 	if(!empty($Consignee->id_fg) && !empty($Consignee->id_bg))
-			 	{
-			 		$type_fg=explode('.',$Consignee['id_fg']);
-			 		$type_bg=explode('.',$Consignee['id_bg']);
-			 	}
-			 	else
-			 	{
-			 		Yii::app()->user->setFlash('error', '图片不存在，请上传。');
-		        	$this->redirect('/manage/consigneeID', true);
-			 	}
-			 	
-			 	//print_r($type_fg[1]);exit;
-			 	if(in_array($type_fg[1], $allowtype) && in_array($type_bg[1], $allowtype))
-			 	{
-				 	$imgs = array(
-					        'dst' => Yii::getPathOfAlias('webroot.upload') . DIRECTORY_SEPARATOR . $Consignee['id_fg'],
-					        'src' => Yii::getPathOfAlias('webroot.upload') . DIRECTORY_SEPARATOR . $Consignee['id_bg']
-					);
-					list($dst_width, $dst_height) = getimagesize($imgs['dst']);
-					list($src_width, $src_height) = getimagesize($imgs['src']);
-					if($dst_width>=$src_width)
-					{
-						$max_width = $dst_width;
-					}
-					else
-					{
-						$max_width = $src_width;
-					}
-					if($dst_height>=$src_height)
-					{
-						$max_height = $dst_height;
-					}
-					else
-					{
-						$max_height = $src_height;
-					}
-				 	//list($max_width, $max_height) = getimagesize($imgs['dst']);
-	        		$dests = imagecreatetruecolor($max_width, 2*$max_height);
-	 				if($type_fg[1] == 'png')
-	 				{
-	 					$dst_im = imagecreatefrompng($imgs['dst']);
-	 				}
-	 				elseif($type_fg[1] == 'gif')
-	 				{
-	 					$dst_im = imagecreatefromgif($imgs['dst']);
-	 				}
-	 				else
-	 				{
-	 					$dst_im = imagecreatefromjpeg($imgs['dst']);
-	 				}
-			        
-			        imagecopy($dests,$dst_im,0,0,0,0,$max_width,$max_height);
-			        imagedestroy($dst_im);
-			 		
-			 		if($type_bg[1] == 'png')
-			 		{
-			 			$src_im = imagecreatefrompng($imgs['src']);
-			 		}
-			 		elseif($type_bg[1] == 'gif')
-			 		{
-			 			$src_im = imagecreatefromgif($imgs['src']);
-			 		}
-			 		else
-			 		{
-			 			$src_im = imagecreatefromjpeg($imgs['src']);
-			 		}
-			        
-			        $src_info = getimagesize($imgs['src']);
-			        imagecopy($dests,$src_im,0,$max_height,0,0,$src_info[0],$src_info[1]);
-			        imagedestroy($src_im);
-			        
-					$file_path = Yii::getPathOfAlias('webroot.upload') . DIRECTORY_SEPARATOR . '/0/' . $Consignee['realname'] .'.' . $type_fg[1];
-					imagejpeg($dests,$file_path);
-					//print_r($file_path);exit;
-					$fileinfo = pathinfo($file_path);
-					$file_name=basename($file_path);
-				    $file_type=explode('.',$file_path);
-				    $file_type=$file_type[count($file_type)-1];
-				    $file_name = $Consignee['realname'] . '.' . $file_type;
-					
-					$file_type=fopen($file_path,'r'); //打开文件
-					//输入文件标签
-				    header("Content-type: application/octet-stream");
-				    header("Accept-Ranges: bytes");
-				    header("Accept-Length: ".filesize($file_path));
-				    header("Content-Disposition: attachment; filename=".$file_name);
-				    //输出文件内容
-				    echo fread($file_type,filesize($file_path));
-				    fclose($file_type);
-				    
-			        //header("Content-type: image/jpeg");
-			        //imagejpeg($dests);
-		        }
-		        else
-		        {
-		        	Yii::app()->user->setFlash('error', '图片格式不正确，无法导出，重新上传正确格式照片。');
-		        	$this->redirect('/manage/consigneeID', true);
-		        }
-			 }
+	/*
+	 * 导出证件反面
+	 */
+	/*public function actionDownloadBG($consignee_id)
+	{	
+		$Consignee = Consignee::model()->findByPk($consignee_id);
+		$file = $Consignee['id_bg'];
+		$new_name = $Consignee['realname'];
+		if (!empty($file))
+		{	
+			$file_url = Yii::getPathOfAlias('webroot.upload') . DIRECTORY_SEPARATOR . $file;
+			$fileinfo = pathinfo($file_url);
+			$file_name=basename($file_url);
+		    $file_type=explode('.',$file_url);
+		    $file_type=$file_type[count($file_type)-1];
+		    $file_name = $new_name.'-2.'.$file_type;
+		    //print_r($file_name);exit;
+		    $file_type=fopen($file_url,'r'); //打开文件
+		    //输入文件标签
+		    header("Content-type: application/octet-stream");
+		    header("Accept-Ranges: bytes");
+		    header("Accept-Length: ".filesize($file_url));
+		    header("Content-Disposition: attachment; filename=".$file_name);
+		    //输出文件内容
+		    echo fread($file_type,filesize($file_url));
+		    fclose($file_type);
+		}
+	}*/
+
+	/*
+	 * 合并图片并下载
+	 */
+	 public function actionMergerImg($consignee_id)
+	 {	
+		$Consignee = Consignee::model()->findByPk($consignee_id);
+		$allowtype = array('jpg', 'jpeg', 'png', 'gif');
+		if(!empty($Consignee->id_fg) && !empty($Consignee->id_bg))
+		{
+			$type_fg=explode('.',$Consignee['id_fg']);
+			$type_bg=explode('.',$Consignee['id_bg']);
+		}
+		else
+		{
+			Yii::app()->user->setFlash('error', '图片不存在，请上传。');
+			$this->redirect('/manage/consigneeID', true);
+		}
+
+		//print_r($type_fg[1]);exit;
+		if(in_array($type_fg[1], $allowtype) && in_array($type_bg[1], $allowtype))
+		{
+			$imgs = array(
+				'dst' => Yii::getPathOfAlias('webroot.upload') . DIRECTORY_SEPARATOR . $Consignee['id_fg'],
+				'src' => Yii::getPathOfAlias('webroot.upload') . DIRECTORY_SEPARATOR . $Consignee['id_bg']
+			);
+			list($dst_width, $dst_height) = getimagesize($imgs['dst']);
+			list($src_width, $src_height) = getimagesize($imgs['src']);
+			if($dst_width>=$src_width)
+			{
+				$max_width = $dst_width;
+			}
+			else
+			{
+				$max_width = $src_width;
+			}
+			if($dst_height>=$src_height)
+			{
+				$max_height = $dst_height;
+			}
+			else
+			{
+				$max_height = $src_height;
+			}
+			//list($max_width, $max_height) = getimagesize($imgs['dst']);
+			$dests = imagecreatetruecolor($max_width, 2*$max_height);
+			if($type_fg[1] == 'png')
+			{
+				$dst_im = imagecreatefrompng($imgs['dst']);
+			}
+			elseif($type_fg[1] == 'gif')
+			{
+				$dst_im = imagecreatefromgif($imgs['dst']);
+			}
+			else
+			{
+				$dst_im = imagecreatefromjpeg($imgs['dst']);
+			}
+
+			imagecopy($dests,$dst_im,0,0,0,0,$max_width,$max_height);
+			imagedestroy($dst_im);
+
+			if($type_bg[1] == 'png')
+			{
+				$src_im = imagecreatefrompng($imgs['src']);
+			}
+			elseif($type_bg[1] == 'gif')
+			{
+				$src_im = imagecreatefromgif($imgs['src']);
+			}
+			else
+			{
+				$src_im = imagecreatefromjpeg($imgs['src']);
+			}
+
+			$src_info = getimagesize($imgs['src']);
+			imagecopy($dests,$src_im,0,$max_height,0,0,$src_info[0],$src_info[1]);
+			imagedestroy($src_im);
+
+			$file_path = Yii::getPathOfAlias('webroot.upload') . DIRECTORY_SEPARATOR . '/0/' . $Consignee['realname'] .'.' . $type_fg[1];
+			imagejpeg($dests,$file_path);
+			//print_r($file_path);exit;
+			$fileinfo = pathinfo($file_path);
+			$file_name=basename($file_path);
+		        $file_type=explode('.',$file_path);
+		        $file_type=$file_type[count($file_type)-1];
+		        $file_name = $Consignee['realname'] . '.' . $file_type;
+
+			$file_type=fopen($file_path,'r'); //打开文件
+			//输入文件标签
+		        header("Content-type: application/octet-stream");
+		        header("Accept-Ranges: bytes");
+		        header("Accept-Length: ".filesize($file_path));
+		        header("Content-Disposition: attachment; filename=".$file_name);
+		        //输出文件内容
+		        echo fread($file_type,filesize($file_path));
+		        fclose($file_type);
+
+		        //header("Content-type: image/jpeg");
+			//imagejpeg($dests);
+		}
+		else
+		{
+			Yii::app()->user->setFlash('error', '图片格式不正确，无法导出，重新上传正确格式照片。');
+			$this->redirect('/manage/consigneeID', true);
+		}
+	 }
 	
 	
 }
